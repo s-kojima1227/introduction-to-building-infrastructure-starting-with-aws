@@ -6,9 +6,11 @@ export class SetupVpcStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const vpc = new ec2.CfnVPC(this, 'CreateVpc', {
-      cidrBlock: '10.0.0.0/16',
-      tags: [{ key: 'Name', value: 'sample-vpc' }],
+    const vpc = new ec2.Vpc(this, 'CreateVpc', {
+      vpcName: 'sample-vpc',
+      ipAddresses: ec2.IpAddresses.cidr('10.0.0.0/16'),
+      enableDnsHostnames: false,
+      subnetConfiguration: [],
     });
   }
 }
